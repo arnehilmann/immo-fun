@@ -6,12 +6,12 @@ fn main() {
         .expect("Failed to read line");
 
     let buffer = String::from_utf8_lossy(&buffer);
-    dbg!(&buffer);
+    // dbg!(&buffer);
 
     let payload: serde_json::Value = serde_json::from_str(&buffer).unwrap();
     dbg!(&payload);
 
-    let url = payload["url"].as_str().unwrap();
+    let url = payload["client_payload"]["url"].as_str().unwrap();
     dbg!(&url);
 }
 

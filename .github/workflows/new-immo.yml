@@ -1,0 +1,24 @@
+name: Repository Dispatch - New Imm0
+# permissions:
+# contents: write
+on:
+  repository_dispatch:
+    types: [new-immo]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump the event
+        env:
+          EVENT: ${{ toJson(github.event) }}
+        run: echo "$EVENT"
+
+      - name: Extract and convert
+        run: echo '${{ toJson(github.event) }}' | ./bin/archive
+
+      - name: Debug
+        run: |
+          pwd
+          ls -al
+          find .
+          env

@@ -23,7 +23,9 @@ jobs:
         env:
           SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
           SERVICE_ACCOUNT_JSON: ${{ secrets.SERVICE_ACCOUNT_JSON }}
-        run: ./bin/store
+        run: |
+          env
+          ./bin/store
 
       - name: Debug
         run: |

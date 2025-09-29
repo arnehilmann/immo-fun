@@ -25,7 +25,11 @@ jobs:
           SERVICE_ACCOUNT_JSON: ${{ secrets.SERVICE_ACCOUNT_JSON }}
         run: |
           env
+          echo
           base64 <<< $SPREADSHEET_ID | head -c 10
+          echo
+          base64 <<< $SERVICE_ACCOUNT_JSON | head -c 10
+          echo
           ./bin/store
 
       - name: Debug

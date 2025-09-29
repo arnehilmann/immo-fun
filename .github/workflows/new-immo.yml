@@ -16,8 +16,14 @@ jobs:
       - name: Checkout source repo
         uses: actions/checkout@v4
 
-      - name: Extract and convert
-        run: echo '${{ toJson(github.event) }}' | ./bin/archive
+      - name: Fetch and Extract
+        run: echo '${{ toJson(github.event) }}' | ./bin/extract
+
+      - name: Convert
+        env:
+          SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
+          SERVICE_ACCOUNT_JSON: ${{ secrets.SERVICE_ACCOUNT_JSON }}
+        run: ./bin/store
 
       - name: Debug
         run: |

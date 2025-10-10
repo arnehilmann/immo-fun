@@ -11,13 +11,23 @@ jobs:
       - name: Dump the event
         env:
           EVENT: ${{ toJson(github.event) }}
-        run: echo "$EVENT"
+        run: |
+          printf "########\n"
+          printf "${{ github.event }}"
+          printf "########\n"
+          printf "$EVENT\n"
+          printf "########\n"
+          echo "$EVENT"
+          printf "########\n"
 
       - name: Checkout source repo
         uses: actions/checkout@v4
 
       - name: Fetch and Extract
-        run: echo '${{ toJson(github.event) }}' | ./bin/extract
+        run: |
+          url=$(printf "$event" | sed -n '/^https:/s/"//p')
+          printf "url: $url\n"
+          ./bin/extract $url
 
       - name: Convert
         env:

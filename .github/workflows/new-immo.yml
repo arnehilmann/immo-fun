@@ -18,6 +18,10 @@ jobs:
           printf "$EVENT\n"
           printf "######## json/echo\n"
           echo "$EVENT"
+          printf "######## sed\n"
+          printf "$EVENT" | sed -n '/https:/p'
+          printf "########\n"
+          printf "$EVENT" | sed -n '/^https:/p'
           printf "########\n"
 
       - name: Checkout source repo

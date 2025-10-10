@@ -12,11 +12,11 @@ jobs:
         env:
           EVENT: ${{ toJson(github.event) }}
         run: |
-          printf "########\n"
+          printf "######## raw\n"
           printf "${{ github.event }}"
-          printf "########\n"
+          printf "######## json\n"
           printf "$EVENT\n"
-          printf "########\n"
+          printf "######## json/echo\n"
           echo "$EVENT"
           printf "########\n"
 
@@ -25,7 +25,7 @@ jobs:
 
       - name: Fetch and Extract
         run: |
-          url=$(printf "$event" | sed -n '/^https:/s/"//p')
+          url=$(printf "$EVENT" | sed -n '/^https:/s/"//p')
           printf "url: $url\n"
           ./bin/extract $url
 
